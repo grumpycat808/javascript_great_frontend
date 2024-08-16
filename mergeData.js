@@ -1,30 +1,33 @@
 function selectData(sessions, options) {
-    if(!options) return sessions;
+    if (!options) return sessions
 
-    let returnArr = [...sessions];
+    let returnArr = [...sessions]
 
-    if(options.hasOwnProperty('merge') && options.merge) {
-        returnArr = mergeData(returnArr);
+    if (options.hasOwnProperty('merge') && options.merge) {
+        returnArr = mergeData(returnArr)
     }
     if (options.hasOwnProperty('user')) {
         returnArr = returnArr.filter((session) => session.user === options.user)
     }
 
     if (options.hasOwnProperty('minDuration')) {
-        returnArr = returnArr.filter((session) => session.duration >= options.minDuration)
+        returnArr = returnArr.filter(
+            (session) => session.duration >= options.minDuration,
+        )
     }
 
     if (options.hasOwnProperty('equipment')) {
-        returnArr = returnArr.filter((session) => arraysIntersect(session.equipment, options.equipment))
+        returnArr = returnArr.filter((session) =>
+            arraysIntersect(session.equipment, options.equipment),
+        )
     }
-    return returnArr;
+    return returnArr
 }
 
 function arraysIntersect(array1, array2) {
-    return array1.filter(x => array2.includes(x)).length > 0;
+    return array1.filter((x) => array2.includes(x)).length > 0
 }
 function mergeData(sessions) {
-
     const map = sessions.reverse().reduce((accumulator, currentVal) => {
         if (accumulator.has(currentVal.user)) {
             const currentUser = accumulator.get(currentVal.user)
@@ -45,8 +48,8 @@ function mergeData(sessions) {
         }
         return accumulator
     }, new Map())
-   
-    let values = Array.from( map.values() ).reverse();
+
+    let values = Array.from(map.values()).reverse()
     return values
 }
 const mergeArrays = (array1, array2) => {
@@ -59,13 +62,13 @@ const mergeArrays = (array1, array2) => {
 }
 
 const sessions = [
-  { user: 8, duration: 50, equipment: ['bench'] },
-  { user: 7, duration: 150, equipment: ['dumbbell', 'kettlebell'] },
-  { user: 1, duration: 10, equipment: ['barbell'] },
-  { user: 7, duration: 100, equipment: ['bike', 'kettlebell'] },
-  { user: 7, duration: 200, equipment: ['bike'] },
-  { user: 2, duration: 200, equipment: ['treadmill'] },
-  { user: 2, duration: 200, equipment: ['bike'] },
-];
+    { user: 8, duration: 50, equipment: ['bench'] },
+    { user: 7, duration: 150, equipment: ['dumbbell', 'kettlebell'] },
+    { user: 1, duration: 10, equipment: ['barbell'] },
+    { user: 7, duration: 100, equipment: ['bike', 'kettlebell'] },
+    { user: 7, duration: 200, equipment: ['bike'] },
+    { user: 2, duration: 200, equipment: ['treadmill'] },
+    { user: 2, duration: 200, equipment: ['bike'] },
+]
 
-console.log(selectData(sessions, { merge: true, minDuration: 400 }));
+console.log(selectData(sessions, { merge: true, minDuration: 400 }))

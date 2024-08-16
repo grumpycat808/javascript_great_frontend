@@ -1,31 +1,36 @@
 const throttleInput = document.getElementById('throttle-input')
 const throttleText = document.getElementById('throttle-text')
 
-function throttle(callback, delay) {
+const throttle = (callback, delay) => {
     let shouldWait = false
-    let waitingArgs
+    let waitingArgs = null
     return (...args) => {
-        waitingArgs = args
-        let test = waitingArgs
-        // console.log("...args", test[0].target.value)
-        if (!shouldWait) {
+        if (shouldWait) {
+            waitingArgs = args //??
+        } else {
+            //don't need to wait
             callback(...args)
             shouldWait = true
             setTimeout(() => {
                 shouldWait = false
-                if (waitingArgs) {
+
+                console.log('waitingargs', waitingArgs[0].target.value)
+                console.log('args', args[0].target.value)
+                if (
+                    waitingArgs &&
+                    waitingArgs[0].target.value != args[0].target.value
+                ) {
                     callback(...waitingArgs)
                 }
             }, delay)
         }
     }
 }
-
 let i = 0
 throttleInput.addEventListener(
     'input',
     throttle(function (e) {
-        console.log('Calling', i)
+        console.log('Called', i)
         i++
         throttleText.innerText = e.target.value
     }, 1000),
