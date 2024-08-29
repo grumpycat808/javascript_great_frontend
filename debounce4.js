@@ -1,8 +1,8 @@
 const debounceInput = document.getElementById('debounce-text-input')
-const debounceOutput = document.getElementById('debounce-text');
+const debounceOutput = document.getElementById('debounce-text')
 
 function debounce(callback, delay) {
-    let timeout;
+    let timeout
 
     return (...args) => {
         clearTimeout(timeout)
@@ -12,4 +12,7 @@ function debounce(callback, delay) {
     }
 }
 
-debounceInput.addEventListener('input', debounce((e) => debounceOutput.innerText = e.target.value, 1000))
+debounceInput.addEventListener(
+    'input',
+    debounce((e) => (debounceOutput.innerText = e.target.value), 1000),
+)
