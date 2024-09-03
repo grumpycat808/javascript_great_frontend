@@ -9,4 +9,6 @@ Array.prototype.myMap = function (callbackFn, thisArg) {
 
     console.log(returnArr)
     return returnArr
-}[(1, 2, 3, 4)].myMap((i) => i * i)
+}
+
+[(1, 2, 3, 4)].myMap((i) => i * i)
