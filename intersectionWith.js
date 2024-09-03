@@ -1,25 +1,24 @@
-
 function intersectionWith(comparator, ...arrays) {
-    if(arrays.length === 0) return [];
+    if (arrays.length === 0) return []
 
-    const firstArr = arrays[0];
+    const firstArr = arrays[0]
 
     const filteredArr = firstArr.filter((item) => {
-        let exists = true;
+        let exists = true
 
         arrays.forEach((arr) => {
-            if(!arr.some((element) => comparator(element, item))) {
-                exists = false;
+            if (!arr.some((element) => comparator(element, item))) {
+                exists = false
             }
         })
 
-        return exists;
+        return exists
     })
 
-    return filteredArr;
-  }
+    return filteredArr
+}
 
-  intersectionWith()
+intersectionWith()
 // function intersectionWith(comparator, ...arrays) {
 //     for (let index = 0; index < arrays.length; index++) {
 //         const array = arrays[index]
@@ -40,8 +39,8 @@ function intersectionWith(comparator, ...arrays) {
 //     return exists
 // }
 
-const arr1 = [1, 2, 3];
-    const arr2 = [2, 3, 4, 5];
-    const arr3 = [3, 4, 5, 6, 7];
+const arr1 = [1, 2, 3]
+const arr2 = [2, 3, 4, 5]
+const arr3 = [3, 4, 5, 6, 7]
 
-    intersectionWith((x, y) => x == y, arr1, arr2, arr3)
+intersectionWith((x, y) => x == y, arr1, arr2, arr3)

@@ -8,8 +8,8 @@ const throttle = (callback, delay) => {
         if (waitingArgs === null) {
             shouldWait = false
         } else {
-            callback(...waitingArgs);
-            waitingArgs = null;
+            callback(...waitingArgs)
+            waitingArgs = null
             setTimeout(timeoutFunc, delay)
         }
     }
