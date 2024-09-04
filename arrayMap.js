@@ -60,9 +60,9 @@ Array.prototype.myConcat = function (...items) {
             }
         }
     }
-    console.log("returnArr", returnArr)
+    console.log('returnArr', returnArr)
     return returnArr
 }
 
-const arr = [1,undefined, 2]
-arr.myConcat(3, 4);
+const arr = [1, undefined, 2]
+arr.myConcat(3, 4)
