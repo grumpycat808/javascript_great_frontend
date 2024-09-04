@@ -1,7 +1,6 @@
- class Stack {
-    
+class Stack {
     constructor() {
-        this.stack = [];
+        this.stack = []
     }
 
     /**
@@ -18,8 +17,8 @@
      * @return {*} The item at the top of the stack if it is not empty, `undefined` otherwise.
      */
     pop() {
-        if(!this.stack.length) return;
-        return this.stack.pop();
+        if (!this.stack.length) return
+        return this.stack.pop()
     }
 
     /**
@@ -27,7 +26,7 @@
      * @return {boolean} `true` if the stack has no items, `false` otherwise.
      */
     isEmpty() {
-        return this.stack.length === 0;
+        return this.stack.length === 0
     }
 
     /**
@@ -43,10 +42,10 @@
      * @return {number} The number of items in the stack.
      */
     length() {
-        return this.stack.length;
+        return this.stack.length
     }
 }
 
-const s = new Stack();
- s.push(100);
-  s.push(200);
+const s = new Stack()
+s.push(100)
+s.push(200)
