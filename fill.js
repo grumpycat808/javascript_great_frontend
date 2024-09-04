@@ -4,9 +4,7 @@ function fill(array, value, start = 0, end = array.length) {
     // if (start >= array.length) return array
 
     for (let index = start; index < end; index++) {
-
-        if(array.hasOwnProperty(index)) {
-
+        if (array.hasOwnProperty(index)) {
             array[index] = value
         }
     }
