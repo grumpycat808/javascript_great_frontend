@@ -83,4 +83,21 @@ function countHi(str) {
   }  
 }
 
-console.log(countHi("asdojk"))
+const multiplyByTwo = (arr) => {
+    console.log(arr)
+    if(arr.length === 0) return arr;
+    if(arr.length === 1) return arr[0] * 2;
+    arr.shift();
+    return [arr[0] * 2].push(multiplyByTwo(arr))
+}
+
+const sumArr = (arr) => {
+    console.log(arr)
+    if(arr.length === 0) return arr;
+    if(arr.length === 1) return arr[0];
+    const first = arr.shift();
+    return first + sumArr(arr)
+}
+
+console.log("sumArr", sumArr([2, 4, 6, 8]))
+
