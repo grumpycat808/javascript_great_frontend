@@ -86,9 +86,17 @@ function countHi(str) {
 const multiplyByTwo = (arr) => {
     console.log(arr)
     if(arr.length === 0) return arr;
-    if(arr.length === 1) return arr[0] * 2;
-    arr.shift();
-    return [arr[0] * 2].push(multiplyByTwo(arr))
+    if(arr.length === 1) {
+        console.log("base case",  arr[0] * 2)
+        return [arr[0] * 2]
+    };
+    const first = arr.shift();
+    
+    // const returnArr = [first * 2].push(multiplyByTwo(arr))
+    const returnArr = [first * 2];
+    returnArr.push(...multiplyByTwo(arr));
+
+    return returnArr
 }
 
 const sumArr = (arr) => {
@@ -99,5 +107,5 @@ const sumArr = (arr) => {
     return first + sumArr(arr)
 }
 
-console.log("sumArr", sumArr([2, 4, 6, 8]))
+console.log("multiplyByTwo", multiplyByTwo([2, 4, 6, 8]))
 
