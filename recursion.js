@@ -37,75 +37,74 @@ function pairStar(str) {
 }
 
 function nestParen(str) {
-    if(str.length === 0) return true;
-    if(str.length === 1) return false;
-    if(str.charAt(0) === "(" && str.charAt(str.length - 1) === ")") {
-        return nestParen(str.substring(1, str.length  - 1))
+    if (str.length === 0) return true
+    if (str.length === 1) return false
+    if (str.charAt(0) === '(' && str.charAt(str.length - 1) === ')') {
+        return nestParen(str.substring(1, str.length - 1))
     } else {
-        return false;
+        return false
     }
 }
 
 function stringClean(str) {
-  if(str.length <= 1) return str;
+    if (str.length <= 1) return str
 
-  if(str.charAt(0) === str.charAt(1)) {
-    return stringClean(str.substring(1))
-  } else {
-    return str.charAt(0) + stringClean(str.substring(1))
-  }
+    if (str.charAt(0) === str.charAt(1)) {
+        return stringClean(str.substring(1))
+    } else {
+        return str.charAt(0) + stringClean(str.substring(1))
+    }
 }
 
-function parenBit( str) {
-  if(str.charAt(0) === "(" && str.charAt(str.length - 1) === ")") return str;
+function parenBit(str) {
+    if (str.charAt(0) === '(' && str.charAt(str.length - 1) === ')') return str
 
-  if(str.length <= 1) return;
+    if (str.length <= 1) return
 
-  if(str.charAt(0) === "(") {
-    return parenBit(str.substring(0, str.length - 1))
-  } else if (str.charAt(str.length - 1) === ")") {
-    return parenBit(str.substring(1))
-  } else {
-    return parenBit(str.substring(1, str.length - 1))
-  }
+    if (str.charAt(0) === '(') {
+        return parenBit(str.substring(0, str.length - 1))
+    } else if (str.charAt(str.length - 1) === ')') {
+        return parenBit(str.substring(1))
+    } else {
+        return parenBit(str.substring(1, str.length - 1))
+    }
 }
 
 function countHi(str) {
-  if(str.length <= 2) {
-    if(str === 'hi') return 1;
-    return 0;
-  }
+    if (str.length <= 2) {
+        if (str === 'hi') return 1
+        return 0
+    }
 
-  if(str.charAt(0) === 'h' && str.charAt(1) === 'i') {
-    return 1 + countHi(str.substring(2));
-  } else {
-    return countHi(str.substring(1))
-  }  
+    if (str.charAt(0) === 'h' && str.charAt(1) === 'i') {
+        return 1 + countHi(str.substring(2))
+    } else {
+        return countHi(str.substring(1))
+    }
 }
 
 const multiplyByTwo = (arr) => {
     console.log(arr)
-    if(arr.length === 0) return arr;
-    if(arr.length === 1) {
-        console.log("base case",  arr[0] * 2)
+    if (arr.length === 0) return arr
+    if (arr.length === 1) {
+        console.log('base case', arr[0] * 2)
         return [arr[0] * 2]
-    };
-    const first = arr.shift();
-    
+    }
+    const first = arr.shift()
+
     // const returnArr = [first * 2].push(multiplyByTwo(arr))
-    const returnArr = [first * 2];
-    returnArr.push(...multiplyByTwo(arr));
+    const returnArr = [first * 2]
+    returnArr.push(...multiplyByTwo(arr))
 
     return returnArr
 }
 
 const sumArr = (arr) => {
     console.log(arr)
-    if(arr.length === 0) return arr;
-    if(arr.length === 1) return arr[0];
-    const first = arr.shift();
+    if (arr.length === 0) return arr
+    if (arr.length === 1) return arr[0]
+    const first = arr.shift()
     return first + sumArr(arr)
 }
 
-console.log("multiplyByTwo", multiplyByTwo([2, 4, 6, 8]))
-
+console.log('multiplyByTwo', multiplyByTwo([2, 4, 6, 8]))
