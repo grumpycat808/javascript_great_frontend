@@ -1,23 +1,31 @@
 function $(selector) {
     const element = document.querySelector(selector)
 
-    const css = (property, value) => {
-        if (!element) return;
-        if (value !== undefined) {
-            element.style[property] = value
-            return element
-        } else {
-            return element.style[property] ? element.style[property] : undefined
-        }
-    }
-    if (element) {
-        element.css = css
-        return element
-    } else {
-        console.log("HERE")
-        const returnObj = {};
-        returnObj.css = () => returnObj;
-        return returnObj;
+    return {
+        /**
+         * @param {string} prop
+         * @param {boolean|string|number} value
+         * @return {Object|void|string}
+         */
+        css: function (prop, value) {
+            // Getter case.
+            if (value === undefined) {
+                // No matching elements.
+                if (element == null) {
+                    return undefined
+                }
+
+                const value = element.style[prop]
+                return value === '' ? undefined : value
+            }
+
+            // Setter case.
+            if (element != null) {
+                element.style[prop] = value
+            }
+
+            return this
+        },
     }
 }
-console.log($('no-such-thing').css('color'))
+console.log($('no-such-thing').css('color').css('fontSize', '12px'))
