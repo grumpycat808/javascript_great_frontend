@@ -2,13 +2,16 @@ function curry(func) {
     const minArgs = func.length
     let currentArgs = []
 
-    const returnFunction = (...args) => {
+    console.log('this line 5', this)
+    function returnFunction (...args) {
+        console.log('this line 7', this)
         currentArgs.push(...args)
-        console.log(...currentArgs)
+        
         if (currentArgs.length === minArgs) {
-            const allArgs = [...currentArgs];
+            const allArgs = [...currentArgs]
             currentArgs = []
-            return func(...allArgs)
+            const boundFunc = func.bind(this);
+            return boundFunc(...allArgs)
         } else {
             return returnFunction
         }
@@ -20,9 +23,21 @@ function multiplyThreeNumbers(a, b, c) {
     return a * b * c
 }
 
-const curriedMultiplyThreeNumbers = curry(multiplyThreeNumbers)
-console.log("result", curriedMultiplyThreeNumbers(4)(5)(6)) // 120
+function add(a, b) {
+    console.log("this in add", this)
+    return this.age + a + b;
+}
 
-const containsFour = curriedMultiplyThreeNumbers(4)
-const containsFourMulFive = containsFour(5)
-console.log("result", containsFourMulFive(1)) // 120
+const curried = curry(function ( val1, val2) {
+    console.log("this", this)
+    return this.multiplier * (val1 + val2);
+  });
+
+const Person = {
+    multiplier: 5,
+    mul: curried,
+}
+
+Person.mul(2);
+console.log(Person.mul(4))
+// console.log('multiply age', Person.multipleAge(4))
