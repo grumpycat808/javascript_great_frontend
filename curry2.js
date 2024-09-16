@@ -13,33 +13,17 @@ function curry(func) {
             return boundFunc(...allArgs)
         } else {
             const boundReturnFunc = returnFunction.bind(this)
-            return returnFunction
+            return boundReturnFunc
         }
     }
 
     return returnFunction
 }
-function multiplyThreeNumbers(a, b, c) {
-    return a * b * c
-}
-
-// function add(a, b) {
-//     console.log('this in add', this)
-//     return this.age + a + b
-// }
-
-const curried = curry(function (val1, val2) {
-    console.log('this in curried', this)
-    console.log('val1', val1);
-    console.log("val2", val2)
-    return this.multiplier * (val1 + val2)
-})
- const curriedOne = curry(function (val1) {
-    
-    return this.multiplier * (val1)
-})
-const Person = {
-    multiplier: 5,
-    mul: curriedOne,
-}
-console.log(Person.mul(3))
+function multiplyThree(a, b, c) {
+    return a * b * c;
+  }
+const curriedMultiplyThree = curry(multiplyThree);
+console.log(curriedMultiplyThree(4)(5)(6)); // 120
+console.log(curriedMultiplyThree(4)(5, 6)); // 120
+console.log(curriedMultiplyThree(4, 5)(6)); // 120
+console.log(curriedMultiplyThree(4, 5, 6)); // 120
