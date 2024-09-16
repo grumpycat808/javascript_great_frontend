@@ -1,10 +1,9 @@
 function curry(func) {
     let numArgs = func.length
-    
+
     let orginalArgs = []
 
     return function returnFunc(...args) {
-        
         orginalArgs.push(...args)
         // console.log("called", called)
         if (orginalArgs.length === numArgs) {
@@ -16,17 +15,17 @@ function curry(func) {
         return returnFunc
     }
 }
-const square = (a) => a * a;
+const square = (a) => a * a
 // const curried = curry(square);
 
 const curried = curry(function (val) {
     console.log(this)
-    return this.multiplier * val;
-  });
+    return this.multiplier * val
+})
 
 const Person = {
     multiplier: 5,
-    multiplyAge: curried
+    multiplyAge: curried,
 }
 
 console.log(Person.multiplyAge(2))
