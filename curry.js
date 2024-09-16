@@ -1,20 +1,35 @@
 function curry(func) {
     let numArgs = func.length
-    let called = 0
+    
     let orginalArgs = []
 
     return function returnFunc(...args) {
-        called++
+        
         orginalArgs.push(...args)
         // console.log("called", called)
         if (orginalArgs.length === numArgs) {
             console.log('max calls reached', orginalArgs)
-            return func(...orginalArgs)
+            const copy = [...orginalArgs]
+            orginalArgs = []
+            return func(...copy)
         }
         return returnFunc
     }
 }
-const mul = (a, b) => a * b;
-const curried = curry(mul);
-curried()
-console.log(curried(7)(3))
+const square = (a) => a * a;
+// const curried = curry(square);
+
+const curried = curry(function (val) {
+    console.log(this)
+    return this.multiplier * val;
+  });
+
+const Person = {
+    multiplier: 5,
+    multiplyAge: curried
+}
+
+console.log(Person.multiplyAge(2))
+// console.log(curried(2))//calling returnFunc
+
+// console.log(curried(3))//calling returnFunc
