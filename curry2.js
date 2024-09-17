@@ -20,10 +20,10 @@ function curry(func) {
     return returnFunction
 }
 function multiplyThree(a, b, c) {
-    return a * b * c;
-  }
-const curriedMultiplyThree = curry(multiplyThree);
-console.log(curriedMultiplyThree(4)(5)(6)); // 120
-console.log(curriedMultiplyThree(4)(5, 6)); // 120
-console.log(curriedMultiplyThree(4, 5)(6)); // 120
-console.log(curriedMultiplyThree(4, 5, 6)); // 120
+    return a * b * c
+}
+const curriedMultiplyThree = curry(multiplyThree)
+console.log(curriedMultiplyThree(4)(5)(6)) // 120
+console.log(curriedMultiplyThree(4)(5, 6)) // 120
+console.log(curriedMultiplyThree(4, 5)(6)) // 120
+console.log(curriedMultiplyThree(4, 5, 6)) // 120
