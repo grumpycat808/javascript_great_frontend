@@ -1,5 +1,6 @@
 function flatten(value) {
-    if(!value) return
+    if(!value) return;
+    
     console.log("value", value)
     const returnArray = []
     for (let index = 0; index < value.length; index++) {
@@ -35,25 +36,34 @@ function flatten2(arr) {
 // console.log(JSON.stringify(flatten2([[[1]]])))
 
 
-function returnArr(...args) {
-    const arr = [];
-    if(args.length === 1) return args[0];
-    args.pop()
-    console.log(args)
-    arr.push(returnArr(args))
-    return arr;
+function returnArr(inputArr) {
+    console.log("inputArr", inputArr)
+    debugger;
+    if(inputArr.length === 0) {
+        
+        return inputArr
+    };
+    const first = inputArr.pop();
+    const newArr =  returnArr(inputArr);
+    // console.log("newArr", newArr);
+     newArr.push(first * 2)
+     return newArr
 }
 
-console.log(returnArr(4, 5, 6, 7, 8))
+console.log(returnArr([4, 5, 6]))
 
-function array11(nums, index) {
-  if(index >= nums.length) return 0;
-
-  if(nums[index] === 11) {
-    return 1 + array11(nums, index+1)
+function array11(nums) {
+    let copy = [...nums]
+  if( copy.length === 0) return 0;
+    
+  if(copy[nums.length - 1] === 11) {
+    copy.pop();
+    console.log("copy", copy)
+    return 1 + array11(copy)
   } else {
-    return array11(nums, index+1)
+    copy.pop();
+    return array11(copy)
   }
 }
 
-console.log(array11([11, 1, 2, 3, 4, 11, 11], 0))
+// console.log(array11([11, 11, 2, 3, 4, 11, 11]))
