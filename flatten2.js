@@ -1,26 +1,25 @@
 function flatten(value) {
     if (!value) return
-    console.log("HERE")
+    console.log('HERE')
     // if (!Array.isArray(value)) return [value]
-    const returnArr = [];
+    const returnArr = []
     for (let index = 0; index < value.length; index++) {
-        let element = value[index];
-        let counter = 0;
-        while(Array.isArray(element) && counter < 50) {
+        let element = value[index]
+        let counter = 0
+        while (Array.isArray(element) && counter < 50) {
             // debugger
             //INDEX NEEDS TO INCREMENT I THINK?@
             //SPLICE? DO NOT RUN!! INFINITE LOOPS
-            value.splice(index, 1, ...element);
-            element = value[index];
-            console.log("counter", counter)
-        } 
-            returnArr.push(element)
-        
+            value.splice(index, 1, ...element)
+            element = value[index]
+            console.log('counter', counter)
+        }
+        returnArr.push(element)
     }
 
-    return returnArr;
+    return returnArr
 }
-console.log("flatten", JSON.stringify(flatten([[]])))
+console.log('flatten', JSON.stringify(flatten([[]])))
 function returnArr(inputArr) {
     console.log('inputArr', inputArr)
     // debugger
@@ -52,6 +51,6 @@ function array11(nums) {
 
 // console.log(array11([11, 11, 2, 3, 4, 11, 11]))
 /**
- * 
- * 
+ *
+ *
  */
