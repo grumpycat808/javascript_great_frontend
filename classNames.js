@@ -1,7 +1,7 @@
 function classNames(...args) {
     const returnArr = []
-    const flattenedArgs = flatten(args);
-    console.log("flattened", flattenedArgs)
+    const flattenedArgs = flatten(args)
+    console.log('flattened', flattenedArgs)
     for (let index = 0; index < flattenedArgs.length; index++) {
         const className = flattenedArgs[index]
         if (typeof className === 'string') {
@@ -21,16 +21,15 @@ function classNames(...args) {
 }
 
 function flatten(args) {
-    
     for (let index = 0; index < args.length; index++) {
-        let element = args[index];
-        while(Array.isArray(element)) {
-            args.splice(index, 1, ...element);
-            element = args[index];
+        let element = args[index]
+        while (Array.isArray(element)) {
+            args.splice(index, 1, ...element)
+            element = args[index]
         }
     }
 
-    return args;
+    return args
 }
 
-console.log(classNames(null, false, 'bar', undefined, 1, { baz: null }, ''));
+console.log(classNames(null, false, 'bar', undefined, 1, { baz: null }, ''))

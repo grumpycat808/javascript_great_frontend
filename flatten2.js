@@ -1,25 +1,35 @@
 function flatten(value) {
     if (!value) return
-    console.log('HERE')
+
     // if (!Array.isArray(value)) return [value]
     const returnArr = []
     for (let index = 0; index < value.length; index++) {
         let element = value[index]
         let counter = 0
-        while (Array.isArray(element) && counter < 50) {
+        while (Array.isArray(element) && element.length > 0 && counter < 50) {
             // debugger
             //INDEX NEEDS TO INCREMENT I THINK?@
             //SPLICE? DO NOT RUN!! INFINITE LOOPS
-            value.splice(index, 1, ...element)
-            element = value[index]
-            console.log('counter', counter)
+
+            if (element.length > 0) {
+                value.splice(index, 1, ...element)
+                element = value[index]
+            } else {
+                console.log('HERE')
+
+                value.splice(index, 1)
+                element = value[index]
+            }
         }
-        returnArr.push(element)
+        if (Array.isArray(element) && element.length === 0) {
+        } else {
+            returnArr.push(element)
+        }
     }
 
     return returnArr
 }
-console.log('flatten', JSON.stringify(flatten([[]])))
+console.log('flatten', JSON.stringify(flatten([null, true, undefined])))
 function returnArr(inputArr) {
     console.log('inputArr', inputArr)
     // debugger
