@@ -3,8 +3,12 @@ function squashObject(obj) {
     function recursive(squashObj, levels = []) {
         for (const key in squashObj) {
             const element = squashObj[key]
-            if (typeof element === 'object' && typeof element !== 'undefined' && element !== null) {
-                 levels.push(key)
+            if (
+                typeof element === 'object' &&
+                typeof element !== 'undefined' &&
+                element !== null
+            ) {
+                levels.push(key)
                 recursive(element, levels)
             } else {
                 levels.push(key)
@@ -16,21 +20,20 @@ function squashObject(obj) {
             }
         }
 
-        if(levels.length > 0) levels.pop();
+        if (levels.length > 0) levels.pop()
     }
 
     recursive(obj, [])
-    console.log('newObj', newObj);
+    console.log('newObj', newObj)
 
-    return newObj;
+    return newObj
 }
 const object = {
     foo: {
-      '': {
-      
-        bar: 2,
-      },
-      a: 1,
+        '': {
+            bar: 2,
+        },
+        a: 1,
     },
-  }
+}
 squashObject(object)
