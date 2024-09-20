@@ -4,7 +4,7 @@ function squashObject(obj) {
         for (const key in squashObj) {
             const element = squashObj[key]
             if (typeof element === 'object' && typeof element !== 'undefined' && element !== null) {
-                if(key !== '') levels.push(key)
+                 levels.push(key)
                 recursive(element, levels)
             } else {
                 levels.push(key)
