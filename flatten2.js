@@ -1,10 +1,9 @@
 function flatten(value) {
-
-    const returnArr = [];
+    const returnArr = []
     function recursiveFlat(newArray) {
         for (let index = 0; index < newArray.length; index++) {
-            const element = newArray[index];
-            if(Array.isArray(element)) {
+            const element = newArray[index]
+            if (Array.isArray(element)) {
                 recursiveFlat(element)
             } else {
                 returnArr.push(element)
@@ -12,9 +11,8 @@ function flatten(value) {
         }
     }
 
-    recursiveFlat(value);
-    console.log("returnArr", returnArr)
-    return returnArr;
-
+    recursiveFlat(value)
+    console.log('returnArr', returnArr)
+    return returnArr
 }
 flatten([[], [[]], [[], [[[]]]]])
