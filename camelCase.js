@@ -9,15 +9,15 @@ function camelCaseKeys(object) {
             if (typeof value === 'object') {
                 returnObj[convertKey(key)] = recursiveConversion(value)
             } else {
-                obj[convertKey(key)]= value
+                returnObj[convertKey(key)]= value
             }
         }
         // return partialObj;
     }
 
     recursiveConversion(copyObj)
-    // console.log("returnObj", JSON.stringify(returnObj))
-    console.log('camelcase object', copyObj);
+    console.log("returnObj", JSON.stringify(returnObj))
+    // console.log('camelcase object', copyObj);
     
     return copyObj
 }
