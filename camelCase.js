@@ -1,27 +1,25 @@
 function camelCaseKeys(object) {
+    console.log('original object', JSON.stringify(object));
     const returnObj = {}
-
-    if (Array.isArray(object)) {
-    }
+    const copyObj = {...object}
     function recursiveConversion(obj) {
+        const partialObj = {...obj}
         for (const key in obj) {
             const value = obj[key]
             if (typeof value === 'object') {
-                console.log('is object', key)
-                recursiveConversion(value)
+                returnObj[convertKey(key)] = recursiveConversion(value)
             } else {
-                if (key.includes('_')) {
-                    returnObj[convertKey(key)] = value
-                } else {
-                    returnObj[key] = value
-                }
+                obj[convertKey(key)]= value
             }
         }
+        // return partialObj;
     }
 
-    recursiveConversion(object)
-    console.log(returnObj)
-    return returnObj
+    recursiveConversion(copyObj)
+    // console.log("returnObj", JSON.stringify(returnObj))
+    console.log('camelcase object', copyObj);
+    
+    return copyObj
 }
 
 function convertKey(key) {
@@ -32,14 +30,7 @@ function convertKey(key) {
     return arr.join('')
 }
 
-const testObj = {
-    a: 5,
-    c: {
-        f: 9,
-        g: 2,
-    },
-}
-camelCaseKeys(testObj)
+camelCaseKeys({ foo_bar: true, bar_baz: { baz_qux: '1' } });
 
 const isPalindrome = (testString) => {
     if (testString.length === 2) {
@@ -54,4 +45,4 @@ const isPalindrome = (testString) => {
     }
 }
 
-console.log(isPalindrome('1232123'))
+// console.log(isPalindrome('1232123'))
