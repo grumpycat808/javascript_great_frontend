@@ -4,19 +4,18 @@ const throttleText = document.getElementById('throttle-text')
 const throttle = (callback, delay) => {
     let shouldWait = false
     let waitingArgs = null
+    let isWaiting = false;
     return (...args) => {
         if (shouldWait) {
             waitingArgs = args
+            // console.log("waitingArgs", waitingArgs[0].target.value)
         } else {
+            initialArgs = args[0].target.value;
             callback(...args)
             shouldWait = true
-            waitingArgs = null
             setTimeout(() => {
                 shouldWait = false
-                if (waitingArgs !== args) {
-                    // console.log("waitingArgs", waitingArgs[0].target.value)
-                    callback(...waitingArgs)
-                }
+               
             }, delay)
         }
     }
