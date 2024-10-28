@@ -5,7 +5,6 @@ function debounce(callback, delay) {
     let timeout
     return (...args) => {
         clearTimeout(timeout)
-
         timeout = setTimeout(() => {
             callback(...args)
         }, delay)
@@ -15,6 +14,6 @@ function debounce(callback, delay) {
 debounceInput.addEventListener(
     'input',
     debounce((e) => {
-        debounceOutput.innerHTML = e.target.value
-    }, 500),
+        debounceOutput.innerText = e.target.value
+    }, 1000),
 )
