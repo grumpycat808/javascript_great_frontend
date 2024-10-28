@@ -7,32 +7,43 @@ function convertKey(key) {
     return arr.join('')
 }
 function camelCaseKeys(object) {
-    console.log('original object', JSON.stringify(object))
-    const returnObj = {}
-
+    // console.log('original object', JSON.stringify(object))
+    const returnObj = Array.isArray(object) ? [] : {}
     function recursiveConversion(obj, subObj) {
-        const partialObj = {}
-        for (const key in obj) {
-            const value = obj[key]
-            if (typeof value === 'object') {
-                // returnObj[convertKey(key)] = recursiveConversion(value)
-                returnObj[convertKey(key)] = { ...obj[key] }
-                recursiveConversion(obj, returnObj[convertKey(key)])
-            } else {
-                if (subObj !== undefined) {
-                    obj[convertKey(key)] = value
+        if (Array.isArray(obj)) {
+            for (let index = 0; index < obj.length; index++) {
+                const element = obj[index]
+                if (Array.isArray(element)) {
+                    subObj.push(recursiveConversion(element, []))
+                } else if (typeof element === 'object') {
+                    subObj.push(recursiveConversion(element, {}))
                 } else {
-                    returnObj[convertKey(key)] = value
+                    subObj.push(element)
+                }
+            }
+        } else {
+            for (const key in obj) {
+                const element = obj[key]
+                if (Array.isArray(element)) {
+                    subObj[convertKey(key)] = recursiveConversion(element, [])
+                } else if (typeof element === 'object') {
+                    subObj[convertKey(key)] = recursiveConversion(element, {})
+                } else {
+                    subObj[convertKey(key)] = element
                 }
             }
         }
+        return subObj
     }
-    recursiveConversion(object)
-    console.log(returnObj)
+
+    return recursiveConversion(object, returnObj)
+    // console.log(JSON.stringify(newObj))
     // console.log('camelcase object', copyObj);
 }
 
-camelCaseKeys({ foo_bar: true, bar_baz: { hey_yo: 6 } })
+const test = camelCaseKeys([{ baz_qux: true }, { foo: true }])
+
+console.log(JSON.stringify(test))
 
 const isPalindrome = (testString) => {
     if (testString.length === 2) {
