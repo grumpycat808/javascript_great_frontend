@@ -41,4 +41,4 @@ const obj = {
 }
 
 const test = deepOmit(obj, ['b', 'c', 'e'])
-console.log('test', test);
+console.log('test', test)
