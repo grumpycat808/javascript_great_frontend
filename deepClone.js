@@ -1,11 +1,19 @@
 function deepClone(value) {
-    const string = JSON.stringify(value)
+    let returnObj = {}
 
-    return JSON.parse(string)
+    function recursiveClone(item, source) {
+        if (Array.isArray(item)) {
+        } else if (typeof item === 'object') {
+        } else {
+            return item;
+        }
+    }
 }
-const obj1 = { user: { role: 'admin' } }
-const clonedObj1 = deepClone(obj1)
+const bar = {cat: "dog"};
+const one = {foo: bar};
 
-clonedObj1.user.role = 'guest' // Change the cloned user's role to 'guest'.
-console.log(clonedObj1.user.role) // 'guest'
-console.log(obj1.user.role) // Should still be 'admin'.
+const two = {...one};
+
+two.foo.cat = "elephant";
+
+console.log(bar.cat);
