@@ -1,40 +1,42 @@
 function deepMap(value, fn) {
-    if (!Array.isArray(value) && value?.constructor !== Object) {
+    if (value === null) return fn(value)
+    if (
+        value === null ||
+        (!Array.isArray(value) && value?.constructor != Object)
+    )
         return fn(value)
-    }
-    const returnObj = Array.isArray(value) ? [] : {}
 
-    function recursiveMap(input, output) {
-        // debugger
-        if (Array.isArray(input)) {
-            // debugger
-            for (let index = 0; index < input.length; index++) {
-                const element = input[index]
+    const returnVal = Array.isArray(value) ? [] : {}
+    const boundFn = fn.bind(value)
+    function recursiveMap(value, container) {
+        if (Array.isArray(value)) {
+            for (let index = 0; index < value.length; index++) {
+                const element = value[index]
                 if (Array.isArray(element)) {
-                    output.push(recursiveMap(element, []))
-                } else if (element?.constructor === Object) {
-                    output.push(recursiveMap(element, {}))
+                    container.push(recursiveMap(element, []))
+                } else if (typeof element == 'object') {
+                    container.push(recursiveMap(element, {}))
                 } else {
-                    output.push(fn(element))
+                    container.push(boundFn(element))
                 }
             }
-        } else {
-            const boundFn = fn.bind(input)
-            for (const key in input) {
-                const element = input[key]
+        } else if (typeof value == 'object') {
+            for (const key in value) {
+                const element = value[key]
                 if (Array.isArray(element)) {
-                    output[key] = recursiveMap(element, [])
-                } else if (element?.constructor === Object) {
-                    output[key] = recursiveMap(element, {})
+                    container[key] = recursiveMap(element, [])
+                } else if (typeof element == 'object') {
+                    container[key] = recursiveMap(element, {})
                 } else {
-                    output[key] = boundFn(element)
+                    container[key] = boundFn(element)
                 }
             }
         }
-        return output
+
+        return container
     }
 
-    return recursiveMap(value, returnObj)
+    return recursiveMap(value, returnVal)
 }
 const double = (x) => x * 2
 const test = deepMap(
@@ -45,4 +47,10 @@ const test = deepMap(
     },
     double,
 )
-console.log('test', test)
+const dummy = () => 'dummy'
+const identity = (x) => x
+// console.log(test)
+
+// console.log( deepMap({ bar: 3, foo: 2 }, function (this, x) {
+//           return this.foo * x;
+// }))

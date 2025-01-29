@@ -1,34 +1,47 @@
 function curry(func) {
-    let numArgs = func.length
+    const numArgs = func.length
 
-    let orginalArgs = []
+    let argsArray = []
+    //Make this recursive
 
-    return function returnFunc(...args) {
-        orginalArgs.push(...args)
-        // console.log("called", called)
-        if (orginalArgs.length === numArgs) {
-            console.log('max calls reached', orginalArgs)
-            const copy = [...orginalArgs]
-            orginalArgs = []
-            return func(...copy)
+    function recursiveFunc(...args) {
+        return () => {
+            argsArray.push(...args)
+
+            if (argsArray.length === numArgs) {
+                return func(...argsArray)
+            } else {
+                return recursiveFunc(...args)
+            }
         }
-        return returnFunc
     }
+    return recursiveFunc
 }
 const square = (a) => a * a
 // const curried = curry(square);
-
-const curried = curry(function (val) {
-    console.log(this)
-    return this.multiplier * val
-})
-
-const Person = {
-    multiplier: 5,
-    multiplyAge: curried,
+function multiplyThreeNumbers(a, b, c) {
+    return a * b * c
 }
 
-console.log(Person.multiplyAge(2))
+const curriedMultiplyThreeNumbers = curry(multiplyThreeNumbers)
+console.log('curriedMultiplyThreeNumbers', curriedMultiplyThreeNumbers)
+const result = curriedMultiplyThreeNumbers(4)(5)(6) // 120
+console.log('result', result)
+// const containsFour = curriedMultiplyThreeNumbers(4)
+// const containsFourMulFive = containsFour(5)
+// containsFourMulFive(6) // 120
+
+// const curried = curry(function (val) {
+//     console.log(this)
+//     return this.multiplier * val
+// })
+
+// const Person = {
+//     multiplier: 5,
+//     multiplyAge: curried,
+// }
+
+// console.log(Person.multiplyAge(2))
 // console.log(curried(2))//calling returnFunc
 
 // console.log(curried(3))//calling returnFunc

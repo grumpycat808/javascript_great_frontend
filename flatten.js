@@ -1,17 +1,17 @@
 function flatten(value) {
-    console.log('value', value)
+    const returnArr = []
 
-    if (!Array.isArray(value) || value.length === 0) return
-    if (value.length > 1) {
-        const first = value.shift()
-        const returnArr = [first]
-        returnArr.push(flatten(value))
+    function recursiveFlatten(arr, returnArr) {
+        arr.forEach((element) => {
+            if (Array.isArray(element)) {
+                returnArr.push(...recursiveFlatten(element, []))
+            } else {
+                returnArr.push(element)
+            }
+        })
         return returnArr
-    } else {
-        if (value.length === 1) {
-            return value[0]
-        }
     }
+    return recursiveFlatten(value, returnArr)
 }
 console.log('flatten', flatten([1, [2, [3]]]))
 
