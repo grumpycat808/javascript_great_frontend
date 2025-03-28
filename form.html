@@ -3,18 +3,25 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            form {
+                display: flex;
+                flex-direction: column;
+            }
+        </style>
     </head>
     <body>
         <form>
-            <label>Username</label>
-            <input type="text" />
-            <label>Email</label>
-            <input type="text" />
-            <label>Password</label>
-            <input type="text" />
-            <label>Confirm Password</label>
-            <input type="text" />
-            <button type="submit">Submit</button>
+            <div><label>Username</label>
+            <input name="username" type="text" /></div>
+            <div><label>Email</label>
+            <input name="email" type="email" /></div>
+            <div> <label>Password</label>
+            <input name="password" type="password" /></div>
+           <div><label>Confirm Password</label>
+            <input" name="confirm_pw" type="password" /></div>
+            <div><button id="submit">Submit</button></div>
+            
         </form>
         <script src="src/index.js"></script>
     </body>
