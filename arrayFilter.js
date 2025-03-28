@@ -1,24 +1,17 @@
-const obj = {}
-
-const isEvenIndex = (_, index) => index % 2 === 0
-const isThisProductEvenThis = function (element) {
-    console.log(this)
-    return (element * this) % 2 === 0
-}
-const isThisProductEven = function (element) {
-    return element % 2 === 0
-}
 Array.prototype.myFilter = function (callbackFn, thisArg) {
+    const boundFunc = thisArg ? callbackFn.bind(thisArg) : callbackFn
     const returnArr = []
-    const bounbFunc = callbackFn.bind(thisArg)
 
-    this.forEach((item, index, arr) => {
-        if (bounbFunc(item, index, arr)) {
-            returnArr.push(item)
-        }
+    this.forEach((item, index) => {
+        if (boundFunc(item, index)) returnArr.push(i)
     })
 
     return returnArr
 }
-const thisArg = 3
-console.log('filtered: ', [1, 2, 3, 4].myFilter(isThisProductEvenThis, thisArg))
+
+function greaterThan3(num) {
+    return num > 3
+}
+
+const arr = [1, 2, 3, 4, 5].myFilter(greaterThan3)
+console.log(arr)
